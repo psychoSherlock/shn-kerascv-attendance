@@ -9,6 +9,9 @@ navigator.mediaDevices
   });
 
 function capturePicture() {
+  const actions = document.getElementById("actions");
+  actions.innerHTML = '<span class="loader"></span>';
+
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
   canvas.width = video.videoWidth;
@@ -27,12 +30,15 @@ function capturePicture() {
     .then((response) => response.json())
     .then((data) => {
       if (data.status === "success") {
+        actions.innerHTML = ""; // Remove the loader
         alert(data.studentName);
       } else {
+        actions.innerHTML = ""; // Remove the loader
         alert("Failed");
       }
     })
     .catch((error) => {
+      actions.innerHTML = ""; // Remove the loader
       console.error("Error:", error);
     });
 }

@@ -5,29 +5,33 @@ from io import BytesIO
 from PIL import Image
 import re
 import os
-import time
+from time import sleep
 app = Flask(__name__)
 
 
 with open("./data/identifiedPerson.txt", 'w') as file:
-    file.truncate(0)
+    file.truncate(0)  # Clear the file
 
 
 def aireturned():
     while True:
-        modified_time = os.path.getmtime('./data/identifiedPerson.txt')
-        if modified_time != aireturned.last_modified:
-            with open('./data/identifiedPerson.txt', 'r') as file:
-                lines = file.readlines()
-                detectedName = lines[0].strip()
-                confidence = lines[1].strip()
-                # Do something with detectedName and confidence variables
+        sleep(1)
+        print('looping')
+        with open('./data/identifiedPerson.txt', 'r+') as file:
+            lines = file.readlines()
+            lockStatus = lines[0].strip()
+
+            if lockStatus == '0':
+                continue
+            elif lockStatus == '1':
+                detectedName = lines[1].strip()
+                confidence = lines[2].strip()
+
+                lines[0] = '0\n'  # Write 0 instead of inserting at the top
+                file.seek(0)
+                file.writelines(lines)
+
                 return detectedName, confidence
-        time.sleep(1)
-        aireturned.last_modified = modified_time
-
-
-aireturned.last_modified = os.path.getmtime('./data/identifiedPerson.txt')
 
 
 @app.route('/')

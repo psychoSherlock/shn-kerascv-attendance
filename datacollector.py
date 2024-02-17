@@ -46,14 +46,16 @@ while True:
             string.ascii_lowercase + string.digits, k=10))
 
         # Save the face image without the green box
-        cv2.imwrite(f"{dataset_folder}/{name}_{random_string}.png", face)
-
+        try:
+            cv2.imwrite(f"{dataset_folder}/{name}_{random_string}.png", face)
+        except:
+            continue
         # Increment the face counter
         face_counter += 1
 
         # Break the loop if 100 photos have been captured
-        if face_counter == 100:
-            break
+        # if face_counter == 100:
+        #     break
 
     # Display the face counter on the video window
     cv2.putText(frame, f"Faces saved: {face_counter}",
@@ -63,7 +65,7 @@ while True:
     cv2.imshow("Face Recognition", frame)
 
     # Break the loop if 'q' is pressed or 100 photos have been captured
-    if cv2.waitKey(1) & 0xFF == ord('q') or face_counter == 100:
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
 # Release the video capture and close the window

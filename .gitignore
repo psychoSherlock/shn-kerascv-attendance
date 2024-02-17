@@ -2,4 +2,4 @@
 Dataset/
 data/keras_model.h5
 data/labels.txt
-data/identifiedPerson.txt
+data/*

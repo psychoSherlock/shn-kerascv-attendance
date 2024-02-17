@@ -63,6 +63,7 @@ def check_file_change():
 
         # Write the data to identifiedPerson.txt
         with open("./data/identifiedPerson.txt", "w") as file:
+            file.write('1\n')
             file.write(f"{identified_user}")
             file.write(f"{confidence_percent}")
 
