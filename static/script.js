@@ -10,6 +10,8 @@ navigator.mediaDevices
 
 function capturePicture() {
   const actions = document.getElementById("actions");
+
+  const actionFunctions = actions.innerHTML;
   actions.innerHTML = '<span class="loader"></span>';
 
   const canvas = document.createElement("canvas");
@@ -30,12 +32,15 @@ function capturePicture() {
     .then((response) => response.json())
     .then((data) => {
       if (data.status === "success") {
-        actions.innerHTML = ""; // Remove the loader
-        alert(data.studentName);
+        actions.innerHTML = `<div class="studentDetails"> <span >Name: ${data.studentName}</span>\n<span>Confidence: ${data.confidence}</span>\n<span >Attendance: <green>${data.attendance}</green> </span>`;
       } else {
-        actions.innerHTML = ""; // Remove the loader
-        alert("Failed");
+        actions.innerHTML =
+          '<div class="studentDetails"><span>Failed</span></div>'; // Remove the loader
+        // alert("Failed");
       }
+      setTimeout(() => {
+        actions.innerHTML = actionFunctions;
+      }, 3000);
     })
     .catch((error) => {
       actions.innerHTML = ""; // Remove the loader

@@ -2,4 +2,6 @@
 Dataset/
 data/keras_model.h5
 data/labels.txt
-data/*
+data/capturedImage.png
+data/identifiedPerson.txt
+data/capturedImage.png

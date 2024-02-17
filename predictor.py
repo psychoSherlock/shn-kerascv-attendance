@@ -5,6 +5,7 @@ import cv2
 import numpy as np
 import os
 
+
 # Load the model
 # Load the cascade for face detection
 face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
@@ -21,7 +22,10 @@ def predictStudent():
     image = cv2.imread("data/capturedImage.png")
 
     # Convert the image to grayscale
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    try:
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    except:
+        return "Face not clear", "0%"
 
     # Detect faces in the grayscale image
     faces = face_cascade.detectMultiScale(

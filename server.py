@@ -6,7 +6,27 @@ from PIL import Image
 import re
 import os
 from time import sleep
+from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///class.db'
+db = SQLAlchemy(app)
+
+
+class Student(db.Model):
+    id = db.Column(db.String(50), primary_key=True)
+    name = db.Column(db.String(100))
+    attendance = db.Column(db.Boolean)
+
+    def __init__(self, id, name, attendance):
+        self.id = id
+        self.name = name
+        self.attendance = attendance
+
+
+# Create the student table
+with app.app_context():
+    db.create_all()
 
 
 with open("./data/identifiedPerson.txt", 'w') as file:
@@ -34,6 +54,30 @@ def aireturned():
                 return detectedName, confidence
 
 
+def get_student_details(student_id):
+    with app.app_context():
+        student = Student.query.filter_by(id=student_id).first()
+        if student:
+            return {
+                'id': student.id,
+                'name': student.name,
+                'attendance': student.attendance
+            }
+        else:
+            return None
+
+
+def markAttendance(student_id):
+    with app.app_context():
+        student = Student.query.filter_by(id=student_id).first()
+        if student:
+            student.attendance = True
+            db.session.commit()
+            return True
+        else:
+            return False
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -48,9 +92,9 @@ def save_image():
             re.search(r'base64,(.*)', image_data).group(1))
         image = Image.open(BytesIO(image_bytes))
         image.save(os.path.join('data', 'capturedImage.png'))
-
-        detectedName, detectedConfidence = aireturned()
-        return jsonify({'status': 'success', 'studentName': f'{detectedName}', 'confidence': f'{detectedConfidence}'})
+        detectedStudentId, detectedConfidence = aireturned()
+        markAttendance(detectedStudentId)
+        return jsonify({'status': 'success', 'studentName': f'{get_student_details(detectedStudentId)["name"]}', 'attendance': 'Marked', 'confidence': f'{detectedConfidence}'})
     else:
         print(request.data)
         print('Image not received')
