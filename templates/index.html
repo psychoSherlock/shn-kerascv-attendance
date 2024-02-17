@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Class Attendance Register</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="contents">
+      <video autoplay="true" id="videoElement"></video>
+    </div>
+
+    <div class="actions">
+      <button onclick="capturePicture()">Register Attendance</button>
+      <button>Add New</button>
+    </div>
+  </body>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</html>

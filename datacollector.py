@@ -17,7 +17,7 @@ os.makedirs(dataset_folder, exist_ok=True)
 face_counter = 0
 
 # Start capturing video from the default camera
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(2)
 
 while True:
     # Read the current frame

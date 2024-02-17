@@ -1,0 +1,57 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+}
+
+.contents {
+  background-image: url("/static/classroom.jpg");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+  height: 100vh;
+  width: 70vw;
+}
+
+video {
+  position: absolute;
+  top: 53%;
+  left: 36.7%;
+  transform: translate(-50%, -50%);
+  height: 67%;
+  padding-bottom: 3em;
+  border-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+.actions {
+  background-color: #14213d;
+  width: 30em;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 2em;
+}
+
+.actions button {
+  border-radius: 0.5em;
+  background-color: #ef233c;
+  border: 0;
+  padding: 0.5em 1em; /* Adjust padding here */
+  color: white;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  font-size: 1em;
+  width: auto; /* Let the button size adjust to the content */
+}
+
+.actions button:hover {
+  background-color: #d90429;
+}
