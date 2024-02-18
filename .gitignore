@@ -12,3 +12,4 @@ class.db
 capturedImage.png
 keras_model.h5
 labels.txt
+data/capturedImage.png

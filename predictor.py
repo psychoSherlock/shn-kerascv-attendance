@@ -10,7 +10,7 @@ import os
 # Load the cascade for face detection
 face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
-model = load_model("data/keras_model_test.h5", compile=False)
+model = load_model("data/keras_model.h5", compile=False)
 
 # Load the labels
 class_names = open("data/labels.txt", "r").readlines()
