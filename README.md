@@ -12,11 +12,26 @@
 ### Link to product walkthrough
 [link to video](Link Here)
 ## How it Works ?
-1. Explaining the working of project
-2. Embed video of project demo
+1. Open CV is used to collect Dataset of Images, using the haarcascade facials.
+2. The collected db is fed into Deep learning model that uses imagenet weight, VGG16 transform layers, passes through just one Flatten layer and uses softmax as activation function
+3. This data is used by the flask backend to fetch details about the user
+4. User can also record new data which will be approved by the admin.
 ## Libraries used
-Library Name - Version
+Keras CV
+Open CV
+Flask
+Flask SQL Alchemy
+numpy
+Sqlite3
 ## How to configure
-Instructions for setting up project
+```
+git clone https://github.com/psychoSherlock/shn-kerascv-attendance/
+cd shn-kerascv-attendance/
+virtualenv .env
+source .env/bin/activate
+pip3 install -r requirements.txt
+chmod +x start.sh
+
+```
 ## How to Run
-Instructions for running
+./start.sh
