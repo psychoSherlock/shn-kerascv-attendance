@@ -7,6 +7,7 @@ import re
 import os
 from time import sleep
 from flask_sqlalchemy import SQLAlchemy
+from datacollector_video import collect_data_from_video
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///class.db'
@@ -78,9 +79,46 @@ def markAttendance(student_id):
             return False
 
 
+@app.route('/api/registry', methods=['POST'])
+def get_registry():
+    students = Student.query.all()
+    registry = []
+    for student in students:
+        registry.append({
+            'studentid': student.id,
+            'name': student.name,
+            'attendance': "Absent" if student.attendance == 0 else "Present"
+        })
+    return jsonify(registry)
+
+
+@app.route('/addnew')
+def add_new():
+    return render_template('addnew.html')
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+@app.route('/api/saveNew', methods=['POST'])
+def save_new():
+    student_id = request.form['studentId']
+    student_name = request.form['studentName']
+    video_file = request.files['video']
+    video_file.save(os.path.join('data', 'video.mp4'))
+    collect_data_from_video(student_name)
+    with app.app_context():
+        # Save the student details to the database
+        new_student = Student(
+            id=student_id, name=student_name, attendance=False)
+        db.session.add(new_student)
+        db.session.commit()
+
+    # Process the video and perform necessary operations
+
+    return jsonify({'status': 'success', 'message': 'Video saved'})
 
 
 @app.route('/api/save', methods=['POST'])
@@ -93,6 +131,7 @@ def save_image():
         image = Image.open(BytesIO(image_bytes))
         image.save(os.path.join('data', 'capturedImage.png'))
         detectedStudentId, detectedConfidence = aireturned()
+        print(detectedStudentId)
         markAttendance(detectedStudentId)
         return jsonify({'status': 'success', 'studentName': f'{get_student_details(detectedStudentId)["name"]}', 'attendance': 'Marked', 'confidence': f'{detectedConfidence}'})
     else:

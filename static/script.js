@@ -47,3 +47,34 @@ function capturePicture() {
       console.error("Error:", error);
     });
 }
+
+function fetchRegister() {
+  const actions = document.getElementById("actions");
+
+  const actionFunctions = actions.innerHTML;
+  actions.innerHTML = '<span class="loader"></span>';
+
+  fetch("/api/registry", {
+    method: "POST",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      let registryHTML = "";
+      data.forEach((student) => {
+        registryHTML += `<div class="studentDetails">
+          <span>Student Id: ${student.studentid}</span>
+          <span>Student Name: ${student.name}</span>
+          <span>Attendance: ${student.attendance}</span>
+        </div>`;
+      });
+      actions.innerHTML = registryHTML;
+
+      setTimeout(() => {
+        actions.innerHTML = actionFunctions;
+      }, 5000);
+    })
+    .catch((error) => {
+      actions.innerHTML = ""; // Remove the loader
+      console.error("Error:", error);
+    });
+}

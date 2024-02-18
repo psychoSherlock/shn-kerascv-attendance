@@ -56,6 +56,23 @@ video {
   background-color: #d90429;
 }
 
+.actions input[type="text"] {
+  border-radius: 0.5em;
+  background-color: #ef233c;
+  border: 0;
+  padding: 0.5em 1em; /* Adjust padding here */
+  color: white;
+  transition: background-color 0.2s;
+  cursor: text;
+  font-size: 1em;
+  width: auto; /* Let the input size adjust to the content */
+  outline: none;
+}
+
+.actions input[type="text"]:hover {
+  background-color: #d90429;
+}
+
 .loader {
   transform: rotateZ(45deg);
   perspective: 1000px;

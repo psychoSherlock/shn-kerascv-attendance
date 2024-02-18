@@ -5,3 +5,10 @@ data/labels.txt
 data/capturedImage.png
 data/identifiedPerson.txt
 data/capturedImage.png
+Test/
+LossVal_loss.png
+video.mp4
+class.db
+capturedImage.png
+keras_model.h5
+labels.txt

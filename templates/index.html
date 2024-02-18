@@ -15,8 +15,8 @@
 
     <div class="actions" id="actions">
       <button onclick="capturePicture()">Register Attendance</button>
-      <button>Add New</button>
-      <button>Class Register</button>
+      <button onclick="window.location.href='/addnew'">Add New</button>
+      <button onclick="fetchRegister()">Class Register</button>
     </div>
   </body>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
