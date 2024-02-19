@@ -9,8 +9,10 @@
 # Team members
 1. [Athul Prakash](https://github.com/psychoSherlock)
 2. [Sudheesh S Pai](https://github.com/Sudheeshspai)
-### Link to product walkthrough
-[link to video](Link Here)
+### Link to product walkthroug
+
+https://github.com/psychoSherlock/shn-kerascv-attendance/assets/81918189/91c6bd5b-6c28-46bb-b359-6d85acb0630a
+
 ## How it Works ?
 1. Open CV is used to collect Dataset of Images, using the haarcascade facials.
 2. The collected db is fed into Deep learning model that uses imagenet weight, VGG16 transform layers, passes through just one Flatten layer and uses softmax as activation function
