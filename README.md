@@ -3,8 +3,8 @@
 
 
 
-# Project Name
-## Facial Registerar :trollface:
+# Facial Registerar :trollface:
+This project encompasses a facial recognition system designed for class attendance marking. It consists of three main components: a script using Keras to train a facial recognition model, a data collection script utilizing OpenCV for creating a dataset, and a Flask web application managing student information and attendance. The model training script employs a VGG16-based model, while the data collection script captures faces using Haar Cascade Classifier. The Flask web app, backed by SQLite, includes functionalities for student registry, addition, and real-time attendance marking through captured images. The system runs a continuous loop for face detection and attendance updating until manually interrupted. It is important to ensure the presence of required files, directories, and handle security considerations before execution.
 
 # Team members
 1. [Athul Prakash](https://github.com/psychoSherlock)
