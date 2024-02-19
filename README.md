@@ -9,9 +9,9 @@
 # Team members
 1. [Athul Prakash](https://github.com/psychoSherlock)
 2. [Sudheesh S Pai](https://github.com/Sudheeshspai)
-### Link to product walkthroug
+### Link to product walkthrough
 
-https://github.com/psychoSherlock/shn-kerascv-attendance/assets/81918189/91c6bd5b-6c28-46bb-b359-6d85acb0630a
+[Please play this on VLC or similar players](https://github.com/psychoSherlock/shn-kerascv-attendance/assets/81918189/91c6bd5b-6c28-46bb-b359-6d85acb0630a)
 
 ## How it Works ?
 1. Open CV is used to collect Dataset of Images, using the haarcascade facials.
